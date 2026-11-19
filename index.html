@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
   <title>Virgen del Carmen</title>
 
   <meta name="theme-color" content="#ffffff">
@@ -11,6 +12,8 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Virgen del Carmen">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <link rel="manifest" href="manifest.json">
 
   <style>
     html, body {
@@ -33,66 +36,14 @@
       height: calc(100vh - env(safe-area-inset-top));
       height: calc(100dvh - env(safe-area-inset-top));
     }
-
-    /* Pantalla de carga Virgen del Carmen */
-    #splash {
-      position: fixed;
-      inset: 0;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      background: linear-gradient(180deg, #ffffff 0%, #eef6ea 100%);
-      transition: opacity .45s ease, visibility .45s ease;
-    }
-
-    #splash.off {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    #splash .nombre {
-      font-size: 22px;
-      font-weight: 700;
-      color: #1b2620;
-      letter-spacing: .2px;
-      text-align: center;
-    }
-
-    #splash .barra {
-      width: 140px;
-      height: 4px;
-      border-radius: 99px;
-      background: #dfe8db;
-      overflow: hidden;
-    }
-
-    #splash .barra i {
-      display: block;
-      width: 40%;
-      height: 100%;
-      border-radius: 99px;
-      background: #2f7d32;
-      animation: carga 1.1s ease-in-out infinite;
-    }
-
-    @keyframes carga {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(250%); }
-    }
   </style>
 </head>
 
 <body>
 
-  <div id="splash">
-    <div class="nombre">Virgen del Carmen</div>
-    <div class="barra"><i></i></div>
-  </div>
-
-  <iframe id="app" title="Virgen del Carmen"
+  <iframe
+    id="app"
+    title="Virgen del Carmen"
     allow="clipboard-write; geolocation; camera">
   </iframe>
 
@@ -100,17 +51,6 @@
     var URL_APP = 'https://script.google.com/macros/s/AKfycbzpGUt97xRz64tKEWm9iyXHVTGphzJcKG-d8smZob5QiPOWS0gWfvjGSFtZ3ybM9tkd/exec';
 
     var app = document.getElementById('app');
-    var splash = document.getElementById('splash');
-
-    var ocultar = function () {
-      splash.classList.add('off');
-    };
-
-    app.addEventListener('load', function () {
-      setTimeout(ocultar, 400);
-    });
-
-    setTimeout(ocultar, 15000);
 
     app.src = URL_APP + location.search;
   </script>
