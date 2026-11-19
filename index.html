@@ -1,13 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Irrimetric – Agrolatina</title>
+  <title>Irrimetric</title>
 
-  <!-- Logo del cliente: pestaña del navegador e ícono al "Agregar a pantalla de inicio" -->
-  <link rel="icon" type="image/png" href="logo-agrolatina.png">
-  <link rel="apple-touch-icon" href="logo-agrolatina.png">
   <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
@@ -15,45 +13,106 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <style>
-    html, body { margin: 0; height: 100%; background: #ffffff; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; overflow: hidden; }
-    /* La app empieza debajo de la barra de estado / zona del notch: así el difuminado de iOS
-       queda sobre una franja blanca y no sobre el contenido. */
-    body { padding-top: env(safe-area-inset-top); box-sizing: border-box; }
-    iframe { display: block; width: 100%; border: 0;
-             height: calc(100vh - env(safe-area-inset-top));
-             height: calc(100dvh - env(safe-area-inset-top)); }
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #ffffff;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      overflow: hidden;
+    }
 
-    /* Pantalla de carga con el logo del cliente */
+    body {
+      padding-top: env(safe-area-inset-top);
+      box-sizing: border-box;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      border: 0;
+      height: calc(100vh - env(safe-area-inset-top));
+      height: calc(100dvh - env(safe-area-inset-top));
+    }
+
+    /* Pantalla de carga */
     #splash {
-      position: fixed; inset: 0; z-index: 10;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
       background: linear-gradient(180deg, #ffffff 0%, #eef6ea 100%);
       transition: opacity .45s ease, visibility .45s ease;
     }
-    #splash.off { opacity: 0; visibility: hidden; }
-    #splash img { width: min(200px, 50vw); height: auto; object-fit: contain; mix-blend-mode: multiply; }
-    #splash .nombre { font-size: 18px; font-weight: 600; color: #1b2620; letter-spacing: .2px; }
-    #splash .barra { width: 140px; height: 4px; border-radius: 99px; background: #dfe8db; overflow: hidden; }
-    #splash .barra i { display: block; width: 40%; height: 100%; border-radius: 99px; background: #2f7d32; animation: carga 1.1s ease-in-out infinite; }
-    @keyframes carga { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+
+    #splash.off {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #splash .nombre {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1b2620;
+      letter-spacing: .2px;
+    }
+
+    #splash .barra {
+      width: 140px;
+      height: 4px;
+      border-radius: 99px;
+      background: #dfe8db;
+      overflow: hidden;
+    }
+
+    #splash .barra i {
+      display: block;
+      width: 40%;
+      height: 100%;
+      border-radius: 99px;
+      background: #2f7d32;
+      animation: carga 1.1s ease-in-out infinite;
+    }
+
+    @keyframes carga {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(250%); }
+    }
   </style>
 </head>
+
 <body>
+
   <div id="splash">
-    <img src="logo-agrolatina.png" alt="Corporación Agrolatina">
-    <div class="nombre">Corporación Agrolatina</div>
+    <div class="nombre">Irrimetric</div>
     <div class="barra"><i></i></div>
   </div>
 
-  <iframe id="app" title="Irrimetric" allow="clipboard-write; geolocation; camera"></iframe>
+  <iframe id="app" title="Irrimetric"
+    allow="clipboard-write; geolocation; camera">
+  </iframe>
 
   <script>
     var URL_APP = 'https://script.google.com/macros/s/AKfycbzpGUt97xRz64tKEWm9iyXHVTGphzJcKG-d8smZob5QiPOWS0gWfvjGSFtZ3ybM9tkd/exec';
-    var app = document.getElementById('app'), splash = document.getElementById('splash');
-    var ocultar = function () { splash.classList.add('off'); };
-    app.addEventListener('load', function () { setTimeout(ocultar, 400); });
-    setTimeout(ocultar, 15000); // por si la carga tarda demasiado
+
+    var app = document.getElementById('app');
+    var splash = document.getElementById('splash');
+
+    var ocultar = function () {
+      splash.classList.add('off');
+    };
+
+    app.addEventListener('load', function () {
+      setTimeout(ocultar, 400);
+    });
+
+    setTimeout(ocultar, 15000);
+
     app.src = URL_APP + location.search;
   </script>
+
 </body>
 </html>
